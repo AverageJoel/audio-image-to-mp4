@@ -12,22 +12,55 @@ echo "  Combines an image + audio file into an MP4"
 echo "================================================"
 echo ""
 
-# Check ffmpeg
+# Check ffmpeg — install automatically if missing
 if ! command -v ffmpeg &>/dev/null; then
-    echo "ERROR: ffmpeg is not installed."
+    echo "ffmpeg is not installed. Installing it now..."
     echo ""
-    echo "To install ffmpeg:"
-    echo "  Option 1 (easiest) — install Homebrew first, then ffmpeg:"
-    echo "    1. Open Terminal (Spotlight > Terminal)"
-    echo "    2. Paste this and press Enter:"
-    echo '       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
-    echo "    3. Then run:  brew install ffmpeg"
-    echo "    4. Close and re-open this file."
+
+    # Install Homebrew if needed
+    if ! command -v brew &>/dev/null; then
+        echo "Homebrew is not installed. Installing Homebrew first..."
+        echo "(This may take a few minutes and may ask for your Mac password)"
+        echo ""
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+        # Add Homebrew to PATH for this session (Apple Silicon = /opt/homebrew, Intel = /usr/local)
+        if [[ -f /opt/homebrew/bin/brew ]]; then
+            eval "$(/opt/homebrew/bin/brew shellenv)"
+        elif [[ -f /usr/local/bin/brew ]]; then
+            eval "$(/usr/local/bin/brew shellenv)"
+        fi
+
+        if ! command -v brew &>/dev/null; then
+            echo ""
+            echo "ERROR: Homebrew installation failed."
+            echo "Please install ffmpeg manually from: https://ffmpeg.org/download.html"
+            echo ""
+            read -r -p "Press Enter to close..."
+            exit 1
+        fi
+        echo ""
+        echo "Homebrew installed successfully."
+    fi
+
     echo ""
-    echo "  Option 2 — download from https://ffmpeg.org/download.html"
+    echo "Installing ffmpeg..."
+    brew install ffmpeg
+
+    if ! command -v ffmpeg &>/dev/null; then
+        echo ""
+        echo "ERROR: ffmpeg installation failed."
+        echo "Please install it manually from: https://ffmpeg.org/download.html"
+        echo ""
+        read -r -p "Press Enter to close..."
+        exit 1
+    fi
+
     echo ""
-    read -r -p "Press Enter to close..."
-    exit 1
+    echo "ffmpeg installed successfully!"
+    echo ""
+else
+    echo "ffmpeg is already installed. Good to go!"
 fi
 
 # Image file

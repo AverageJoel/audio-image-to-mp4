@@ -8,22 +8,40 @@ echo   Combines an image + audio file into an MP4
 echo ================================================
 echo.
 
-:: Check ffmpeg
+:: Check ffmpeg — install automatically if missing
 where ffmpeg >nul 2>&1
 if errorlevel 1 (
-    echo ERROR: ffmpeg is not installed or not on your PATH.
+    echo ffmpeg is not installed. Installing it now...
     echo.
-    echo To install ffmpeg:
-    echo   1. Open the Start Menu and search for "Terminal" or "Command Prompt"
-    echo   2. Type this command and press Enter:
-    echo      winget install ffmpeg
-    echo   3. Close and reopen this file after it installs.
+
+    where winget >nul 2>&1
+    if errorlevel 1 (
+        echo ERROR: Could not auto-install ffmpeg.
+        echo Please download it manually from: https://ffmpeg.org/download.html
+        echo.
+        pause
+        exit /b 1
+    )
+
+    echo Installing ffmpeg. This may take a minute...
     echo.
-    echo Or download it manually from: https://ffmpeg.org/download.html
+    winget install --id Gyan.FFmpeg -e --accept-package-agreements --accept-source-agreements
+    if errorlevel 1 (
+        echo.
+        echo ERROR: Installation failed.
+        echo Please download ffmpeg manually from: https://ffmpeg.org/download.html
+        echo.
+        pause
+        exit /b 1
+    )
+
     echo.
-    pause
-    exit /b 1
+    echo ffmpeg installed! Relaunching...
+    timeout /t 2 /nobreak >nul
+    start "" "%~f0"
+    exit
 )
+echo ffmpeg is already installed. Good to go!
 
 :: Image file
 echo Step 1 of 3: Image file
