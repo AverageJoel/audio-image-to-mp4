@@ -2,6 +2,74 @@
 
 Combine a static image (logo, cover art, etc.) with an audio file to produce an MP4 video. Useful for uploading music to YouTube or other video platforms.
 
+---
+
+## Beginner's Guide
+
+No coding experience needed. Just follow the steps for your operating system.
+
+### Windows
+
+**Step 1 — Install ffmpeg (one time only)**
+
+1. Click the Start menu and search for **Terminal** or **Command Prompt**, then open it
+2. Paste the following and press Enter:
+   ```
+   winget install ffmpeg
+   ```
+3. Wait for it to finish, then close the window
+
+**Step 2 — Download this tool**
+
+1. On this GitHub page, click the green **Code** button
+2. Click **Download ZIP**
+3. Unzip the folder somewhere easy to find (e.g. your Desktop)
+
+**Step 3 — Make your video**
+
+1. Copy your image file (jpg or png) and your audio file (wav, mp3, etc.) into the unzipped folder
+2. Double-click **`make_video_windows.bat`**
+3. Follow the prompts — type or drag-and-drop your filenames when asked
+4. Your MP4 will appear in the same folder when it's done
+
+---
+
+### Mac
+
+**Step 1 — Install ffmpeg (one time only)**
+
+1. Open **Terminal** (press Cmd+Space, type `Terminal`, press Enter)
+2. Install Homebrew if you don't have it — paste this and press Enter:
+   ```
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+   ```
+3. Then install ffmpeg:
+   ```
+   brew install ffmpeg
+   ```
+
+**Step 2 — Download this tool**
+
+1. On this GitHub page, click the green **Code** button
+2. Click **Download ZIP**
+3. Unzip the folder somewhere easy to find (e.g. your Desktop)
+
+**Step 3 — Allow the script to run (first time only)**
+
+macOS may block the script the first time. To allow it:
+1. Right-click **`make_video_mac.command`** in Finder
+2. Click **Open**
+3. Click **Open** again in the security dialog
+
+**Step 4 — Make your video**
+
+1. Copy your image file and audio file into the unzipped folder
+2. Double-click **`make_video_mac.command`**
+3. Follow the prompts — type or drag-and-drop your filenames when asked
+4. Your MP4 will appear in the same folder when it's done
+
+---
+
 ## Requirements
 
 - [ffmpeg](https://ffmpeg.org/download.html) installed and available on your `PATH`
