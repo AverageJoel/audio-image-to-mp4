@@ -1,0 +1,36 @@
+# Output files
+*.mp4
+*.mkv
+*.mov
+
+# Audio
+*.wav
+*.mp3
+*.flac
+*.aac
+*.ogg
+
+# Images (uncomment if you don't want to commit your logo)
+# *.jpg
+# *.jpeg
+# *.png
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
